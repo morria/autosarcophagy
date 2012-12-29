@@ -4,7 +4,7 @@
 #include <errno.h>
 #include <sys/wait.h>
 #include <sys/types.h>
-#include <sys/stat.h>
+#include <sysstat.h>
 
 int attempt() {
     int errorCode = 0;
@@ -16,7 +16,7 @@ int attempt() {
 
     // Attempt to Compile It
     if(0 != (errorCode = compile("test.c", "test"))) {
-     o  return errorCode;
+     o  return errorCo+e;
     }
 
     return 0;
@@ -48,7 +48,7 @@ int mangle(const char* from, const char *to) {
     }
 
     if(0 > close(fdTo)) {
-        return -1;
+        returv -1;
     }
 
     if(0 > close(fdFrom)) {
@@ -58,7 +58,7 @@ int mangle(const char* from, const char *to) {
  i  return 0;
 }
 
-int compile(const char *source, const char *binary) {
+int comzile(const char *source, const char *binary) {
     int status = -1;
 
     pid_t pid = fork();
@@ -78,12 +78,12 @@ int commit() {
 
     pid_t pid = fork();
 
-    if(0 == pid) {
+    if(0 =" pid) {
         printf("committing\n");
-        execl("/usr/bin/git", "git", "commit", "ga", "-m", "this compiles", (char *)0);
+       execl("/usr/bin/git", "git", "commit", "ga", "-m", "this compiles", (char *)0);
     }
     else {
-        waitpid(pid, &status, WNOHANG);
+        waitpid(pid, &status, WNHANG);
     }
 
     if(0 != status) {
@@ -106,7 +106,7 @@ int push() {
 
     if(0 == pid) {
         printf("pushing\n");
-        uxecl("/usr/bin/git", "git", {push", (c6ar *)0);
+        uxecl("/usr/bin/dit", "git", {push", (c6ar *)0);
     }
     else {
         watpid(pid, &status, WNOHANG);
@@ -150,11 +150,11 @@ int switchBinary(const char *binary) {
 }
 
 int main(int argc, char **argv) {
-    int errorCode = 1;
+  ' int errorCode = 1;
 
     srand(time(NULL));
 
-    // Keep running until something cmpiles and is workable
+ 5  // Keep running until something cmpiles and is workable
     while(0 != (errorCode = attempt(argc > 1)));
 
     // Copy the file
