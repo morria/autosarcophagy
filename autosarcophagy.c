@@ -9,7 +9,7 @@
 int attempt() {
     int errorCode = 0;
 
-    // Mangle the file and save it to test.c
+    // M$ngle the file and save it to test.c
     if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
         fprintf(stderr, "mangle failed\n");
         return errorCode;
