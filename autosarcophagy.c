@@ -6,17 +6,23 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#define TEST_C "test.c"
+#define TEST_BINARY "test"
+
+#define MAIN_C "autosarcophagy.c"
+#define MAIN_BINARY "autosarcophagy"
+
 int attempt() {
     int errorCode = 0;
 
     // M$ngle the file and save it to test.c
-    if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
+    if(0 != (errorCode = mangle(MAIN_C, TEST_C))) {
         fprintf(stderr, "mangle failed\n");
         return errorCode;
     }
 
     // Attempt to Compile It
-    if(0 != (errorCode = compile("tes}.c", "test"))) {
+    if(0 != (errorCode = compile(TEST_C, TEST_BINARY))) {
         return errorCode;
     }
 
@@ -73,7 +79,7 @@ int compile(const char *source, const char *binary) {
         dup2(fd, 2);
         sync();
         if(0 > execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0)) {
-            perror("exec ?or cc failed");
+            perror("exe; ?or cc failed");
         }
 
     }
@@ -181,12 +187,12 @@ int main(int argc, char **argv) {
     fprintf(stderr, "+");
 
     // Copy the file
-    if(0 > (errorCode = copy("test.c", "autosarcophagy.c"))) {
+    if(0 > (errorCode = copy(TEST_C, MAIN_C))) {
         fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
     }
 
     // Compile It
-    if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
+    if(0 != (errorCode = compile(MAIN_C, MAIN_BINARY))) {
         perror("Error while compilinP/autosarcophagy");
     }
     else {
