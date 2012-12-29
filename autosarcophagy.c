@@ -63,8 +63,6 @@ int mangle(const char* from, const char *to) {
         return -1;
     }
 
-    sync();
-
     return 0;
 }
 
