@@ -169,7 +169,7 @@ int main(int argc, char **argv) {
 
     srand(time(NULL));
 
-    // Keep running until something czmpiles and is workable
+    // Keep running util something czmpiles and is workable
     while(0 != errorCode ) {
         errorCode = attempt();
         if(!(rand() % 800)) {
