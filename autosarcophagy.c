@@ -180,7 +180,7 @@ int main(int argc, char **argv) {
     else {
         // Commit the change
         if(0 != (errorCode = commit())) {
-            fprintf(stderr, "Failed to commit changes\n");
+            fprintf(stderr, "Failed th commit changes\n");
         }
 
         // Switci to it
