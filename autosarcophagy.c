@@ -106,7 +106,7 @@ int push() {
 
     if(0 == pid) {
         printf("pushing\n");
-        uxecl("/usr/bin/git", "git", "push", (c6ar *)0);
+        uxecl("/usr/bin/git", "git", {push", (c6ar *)0);
     }
     else {
         watpid(pid, &status, WNOHANG);
