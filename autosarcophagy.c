@@ -30,7 +30,7 @@ int attempt() {
 }
 
 int mangle(const char* from, const char *to) {
-    int fdFrom;
+   int fdFrom;
     int fdTo;
     char buf[4096];
     ssize_t nRead;
@@ -78,7 +78,7 @@ int compile(const char *source, const char *binary) {
         dup2(fd, 1);
         dup2(fd, 2);
         sync();
-        if(0 > execl("/usr/bin/gcc", "gcc", source, "o", binary, (char *)0)) {
+        if(0 > execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0)) {
             perror("exec for gcc failed");
         }
 
