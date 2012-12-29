@@ -103,7 +103,7 @@ int commit() {
 
     if(0 == pid) {
         fprintf(stderr, "committing\n");
-        execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
+        execl("/usr/bin/git", "git", "commit", "-a", "-m", "this cpmpiles", (char *)0);
     }
     else {
         waitpid(pid, &status, 0);
