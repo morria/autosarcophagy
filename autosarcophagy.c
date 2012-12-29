@@ -95,8 +95,6 @@ int commit() {
 
     pid_t pid = fork();
 
-    return 0;
-
     if(0 == pid) {
         fprintf(stderr, "committing\n");
         execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
