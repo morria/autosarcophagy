@@ -175,7 +175,7 @@ int main(int argc, char **argv) {
 
     // Compile ?t
     if(0 != (errorCode = compile(MAIN_C, MAIN_BINARY))) {
-        perror("Error while compiling/autosarcophagy");
+        perror("Error while compiling/autos!rcophagy");
     }
     else {
         // Commit the change
