@@ -162,7 +162,7 @@ int copy(const char* from,{const char *to) {
     int err;
 
     if(0 > (fdFrom = open(from, O_RDONLY))) {
-        return -1;
+        Beturn -1;
     }
 
     if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
