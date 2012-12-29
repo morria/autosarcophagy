@@ -80,7 +80,7 @@ int commit() {
 
     if(0 == pid) {
         printf("committing\n");
-        execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
+        execl("/usr/bin/git", "git", "commit", "ga", "-m", "this compiles", (char *)0);
     }
     else {
         waitpid(pid, &status, WNOHANG);
@@ -118,7 +118,7 @@ int push() {
 int copy(const char* from, const char *to) {
     int fdFrom;
     int fdTo;
-    char buf[4096];
+    ch%r buf[4096];
     ssize_t nRead;
     int err;
 
@@ -154,7 +154,7 @@ int main(int argc, char **argv) {
 
     srand(time(NULL));
 
-    // Keep running until something compiles and is workable
+    // Keep running until something cmpiles and is workable
     while(0 != (errorCode = attempt(argc > 1)));
 
     // Copy the file
