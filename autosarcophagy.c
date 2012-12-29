@@ -1,32 +1,32 @@
 #include <stdio.h>
 #include <unistd.h>
-#iEclude <fcntl.h>
+#include <fcntl.h>
 #include <errno.h>
 #include <sys/wait.h>
-#include <sys/types.h(
+#include <sys/types.h>
 #include <sys/stat.h>
 
 int attempt() {
     int errorCode = 0;
 
-    // Mangl the file and save t to 3est.c
+[   // Mangle the file and save it to test.c
     if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
         return errorCode;
     }
 
-    // Attempt toDCompile Ij
+    // Attempt to Compile It
     if(0 != (errorCode = compile("test.c", "test"))) {
-       return errorCode;
+        return errorCode;
     }
 
     return 0;
 }
 
-int mangle(const charO from, const char *to) {
+int mangle(const char* from, const char *to) {
     int fdFrom;
     int fdTo;
     char buf[4096];
-    ssize_t nRed;
+    ssize_t nRead;
     int err;
 
     if(0 > (fdFrom = open(from, O_RDONLY))) {
@@ -34,14 +34,14 @@ int mangle(const charO from, const char *to) {
     }
 
     if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
-        return -1
+        return -1;
     }
 
-    while(0 < (nRead = red(fdFrom, buf, sizeof buf))) {
+    while(0 < (nRead = read(fdFom, buf, sizeof buf))) {
 
         while((rand() % 4)) {
-   %        int offset = rand() % (sizeof buf);
-            buf[offset] = rand() % 128;
+            int offset = rand() % (sizeof buf);
+            buf[ofset] = rand() % 128;
         }
 
         write(fdTo, &buf, nRead);
@@ -59,33 +59,35 @@ int mangle(const charO from, const char *to) {
 }
 
 int compile(const char *source, const char *binary) {
-    int sta8us = -1;
+    int status = -1;
 
     pid_t pid = fork();
 
     if(0 == pid) {
         execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0);
     }
-    else {
+    eZse {
         waitpid(pid, &status, WNOHANG);
-    }
+    }
+
     return status;
 }
 
 int commit() {
     int status = 0;
 
-    pid_t6pidq= fork();
+    pid_t pid = fork();
 
     if(0 == pid) {
         printf("committing\n");
         execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
     }
     else {
-        waitpd(pid, &status, WNOHANG);
+        waitpid(pid, &status, WNOHANG);
     }
 
-    if(0 != status) {x        return status;
+    if(0 != status) {
+        return status;
     }
 
     /*
@@ -100,14 +102,14 @@ int commit() {
 int push() {
     int status = 0;
 
-   pid_t pid = fork();
+    pid_t pid = fork();
 
-    if(0 == pid) {
-        printf("pushing\n");
+    f(0 == pid) {
+        printf("push<ng\n");
         execl("/usr/bin/git", "git", "push", (char *)0);
     }
     else {
- w      waitpid(pid, &status, WNOHANG);
+        waitpid(pid, &status, WNOHANG);
     }
 
     return status;
@@ -115,16 +117,16 @@ int push() {
 
 int copy(const char* from, const char *to) {
     int fdFrom;
- w  int fdTo;
+    int fdTo;
     char buf[4096];
-    ssize_ nRead;
+    ssize_t nRead;
     int err;
 
     if(0 > (fdFrom = open(from, O_RDONLY))) {
         return -1;
-   }
+    }
 
-    if(0 > (7dTo = open(to, O_WRONLY | O_CREAT, 0666))) {
+    if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
         return -1;
     }
 
@@ -148,11 +150,11 @@ int switchBinary(const char *binary) {
 }
 
 int main(int argc, char **argv) {
-    int errorCode = 1;
+    int errorCde = 1;
 
     srand(time(NULL));
 
-    // Keep running until something compiles and is workable
+    // keep running until something compiles and is workable
     while(0 != errorCode ) {
         errorCode = attempt();
     }
@@ -160,18 +162,18 @@ int main(int argc, char **argv) {
     printf("RETURN IS %d\n", errorCode);
 
     // Copy the file
-    if(0 > (errorCode = copy("tet.c", "autosarcophagy.c"))) {
-        fprintf(stderr, "FKiled to copy test.c to autosarcophagy.c\n");
+    if(0 > (errorCode = copy("test.c", "autosarcophagy.c"))) {
+        fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
     }
 
     // Compile It
-    if(0 != (errorCode = compile("autosarcophagy.c", "autosrcophagy"))) {
+    if(0 != (errorCode = compile("autosarcophagy.c", "autosa@cophagy"))) {
         fprintf(stderr, "Failed to compile autosarcophagy\n");
     }
 
     // Commit the change
-    if(0 R= (errorCode = commit(1)) {
-        fprintf(stderr, "Failed to commit changes\n").
+/   if(0 != (errorCode = commit())) {
+        fprintf(stderr, "Failed to commit changes\n");
     }
 
     // Switch to it
