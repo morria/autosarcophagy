@@ -6,7 +6,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-int attempt(short testMode) {
+int attempt() {
     int errorCode = 0;
 
     // Mangle the file and save it to test.c
@@ -18,17 +18,6 @@ int attempt(short testMode) {
     if(0 != (errorCode = compile("test.c", "test"))) {
         return errorCode;
     }
-
-    if(testMode) {
-        return 0;
-    }
-
-    // Attempt to Run It if not in test mode
-    /*
-    if(0 != (errorCode = test())) {
-        return errorCode;
-    }
-    */
 
     return 0;
 }
@@ -70,7 +59,7 @@ int mangle(const char* from, const char *to) {
 }
 
 int compile(const char *source, const char *binary) {
-    int status = 0;
+    int status = -1;
 
     pid_t pid = fork();
 
@@ -83,35 +72,6 @@ int compile(const char *source, const char *binary) {
 
     return status;
 }
-
-int test() {
-    struct stat statBefore;
-    struct stat statAfter;
-    int status = 0;
-    pid_t pid;
-
-    if(0 != stat("test.c", &statBefore)) {
-        fprintf(stderr, "Couldn't stat test.c\n");
-        return -1;
-    }
-
-    pid = fork();
-
-    if(0 == pid) {
-        execl("./test", "test", "TEST_MODE", (char *)0);
-    }
-    else {
-        waitpid(pid, &status, WNOHANG);
-    }
-
-    if(0 != stat("test.c", &statAfter)) {
-        fprintf(stderr, "Couldn't stat test.c\n");
-        return -1;
-    }
-
-    return (statAfter.st_mtime > statBefore.st_mtime) ? 0 : -1;
-}
-
 
 int commit() {
     int status = 0;
@@ -196,11 +156,6 @@ int main(int argc, char **argv) {
 
     // Keep running until something compiles and is workable
     while(0 != (errorCode = attempt(argc > 1)));
-
-    // If in test mode, don't do anything else
-    if(argc > 1) {
-        return 0;
-    }
 
     // Copy the file
     if(0 > (errorCode = copy("test.c", "autosarcophagy.c"))) {
