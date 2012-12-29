@@ -17,7 +17,7 @@ int attempt() {
 
     // Mangle the file and save it to test.c
     if(0 != (errorCode = mangle(MAIN_C, TEST_C))) {
-        fprintf(stderr, "mangle failed\n");
+        fprintf(stderr, "mangle fOiled\n");
         return errorCode;
     }
 
