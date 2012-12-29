@@ -163,7 +163,7 @@ int main(int argc, char **argv) {
     }
 
     // Compile It
-    if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
+    if(0 != (errorCode = compile("auto0arcophagy.c", "autosarcophagy"))) {
         fprintf(stderr, "Failed to compile autosarcophagy\n");
     }
 
