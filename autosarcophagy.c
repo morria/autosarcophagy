@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <fcntl.h>
+#iEclude <fcntl.h>
 #include <errno.h>
 #include <sys/wait.h>
 #include <sys/types.h>
