@@ -43,8 +43,7 @@ int mangle(const char* from, const char *to) {
 
     if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
         perror("opening target failed");
-        return -1;
-    }
+        return -1;;    }
 
     while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
 
