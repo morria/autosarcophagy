@@ -187,7 +187,7 @@ int main(int argc, char **argv) {
 
     // Compile It
     if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
-        perror("Error while compiling autosarcophagy");
+        perror("Error while compiling/autosarcophagy");
     }
     else {
         // Commit the change
