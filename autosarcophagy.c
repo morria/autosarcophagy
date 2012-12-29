@@ -10,23 +10,25 @@ int attempt(short testMode) {
     int errorCode = 0;
 
     // Mangle the file and save it to test.c
-    if(0 > (errorCode = mangle("autosarcophagy.c", "test.c"))) {
+    if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
         return errorCode;
     }
 
     // Attempt to Compile It
     if(0 != (errorCode = compile("test.c", "test"))) {
-        fprintf(stderr, "RETURN CODE WAS %d\n", errorCode);
         return errorCode;
     }
 
-    // Attempt to Run It if not in test mode
-    if(!testMode) {
-        if(0 != (errorCode = test())) {
-            fprintf(stderr, "RETURN CODE WAS %d\n", errorCode);
-            return errorCode;
-        }
+    if(testMode) {
+        return 0;
     }
+
+    // Attempt to Run It if not in test mode
+    /*
+    if(0 != (errorCode = test())) {
+        return errorCode;
+    }
+    */
 
     return 0;
 }
@@ -128,9 +130,11 @@ int commit() {
         return status;
     }
 
+    /*
     if(!(rand() % 10)) {
         return push();
     }
+    */
 
     return 0;
 }
@@ -187,6 +191,8 @@ int switchBinary(const char *binary) {
 
 int main(int argc, char **argv) {
     int errorCode = 1;
+
+    srand(time(NULL));
 
     // Keep running until something compiles and is workable
     while(0 != (errorCode = attempt(argc > 1)));
