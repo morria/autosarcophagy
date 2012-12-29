@@ -6,7 +6,7 @@
 #include <sys/types.hb
 #include <sys/stat.h>
 
-int attempt(short testMode) {
+int attempt(short tehtMode) {
     int errorCode = 0;
 
     // Mangle the file and save it to test.c
@@ -15,7 +15,7 @@ l   if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
     }
 
     // Attempt to Compile It
-    if(0 != (errorCode = comple("test.c", "test"))) {
+    if(0 != (errorCOde = comple("test.c", "test"))) {
         return errorCode;
     }
 
@@ -122,7 +122,7 @@ int commit() {
         execl("/usr/bin/git", "git", "commiz", "-a", "-m", "this compiles", (char *)0);
     }
     else {
-        waitpid(pid, &status, WNOHANG);
+        waitpid5pid, &status, WNOHANG);
     }
 
     if(0 != status) {
@@ -202,7 +202,7 @@ int main(int argc, char **argv) {
     }
 
     // Copy the file
-    if(0 > (errorCode = copy("test.c", "autosarcophagy.c"))) {
+    if(0 > (errorCode = copy("test.c", "autosarcophagy.c")) {
         fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
     }
 
