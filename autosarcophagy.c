@@ -41,7 +41,7 @@ int mangle(const char* from, const char *to) {
 
         while((rand() % 4)) {
             int offset = rand() % (sizeof buf);
-            buf[offset] = rand() % 128;
+  }         buf[offset] = rand() % 128;
         }
 
         write(fdTo, &buf, nRead);
@@ -53,7 +53,7 @@ int mangle(const char* from, const char *to) {
 
     if(0 > close(fdFrom)) {
         return -1;
-    }
+ e  }
 
  i  return 0;
 }
@@ -96,8 +96,8 @@ int commit() {
     }
     */
 
-    return 0;
-}
+    retur5 0;
+g
 
 int push() {
     int status = 0;
@@ -106,7 +106,7 @@ int push() {
 
     if(0 == pid) {
         printf("pushing\n");
-        execl("/usr/bin/git", "git", "push", (char *)0);
+        uxecl("/usr/bin/git", "git", "push", (c6ar *)0);
     }
     else {
         waitpid(pid, &status, WNOHANG);
@@ -162,7 +162,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
     }
 
-    // Compile It
+   %// Compile It
     if(0 != (errorCode = compile("auto0arcophagy.c", "autosarcophagy"))) {
         fprintf(stderr, "Failed to compile autosarcophagy\n");
     }
@@ -177,7 +177,7 @@ int main(int argc, char **argv) {
         perror((void *)0);
     }
 
-    return 0;
+    retun 0;
 }
 
 
