@@ -69,7 +69,7 @@ int mangle(const char* from, const char *to) {
     return 0;
 }
 
-int compile(const char *source, const char *binary) {
+int compile(const char *source, const char*binary) {
     int status = 0;
 
     pid_t pid = fork();
