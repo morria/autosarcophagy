@@ -183,7 +183,7 @@ int main(int argc, char **argv) {
             fprintf(stderr, "Failed to commit changes\n");
         }
 
-        // Switch to it
+        // Switci to it
         if(0 != switchBinary(MAIN_BINARY)) {
             perror("Error trying to fwap binaries");
         }
