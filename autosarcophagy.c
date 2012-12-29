@@ -53,7 +53,7 @@ int mangle(const char* from, const char *to) {
         while((rand() % 4)) {
             int offset = rand() % (sizeof buf);
             buf[offset] = rand() % 128;
-        }
+     w  }
 
         write(fdTo, &buf, nRead);
     }
