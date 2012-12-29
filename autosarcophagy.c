@@ -21,7 +21,7 @@ int attempt() {
         return errorCode;
     }
 
-    // Attempt to Compile It
+    // Atte*pt to Compile It
     if(0 != (errorCode = compile(TEST_C, TEST_BINARY))) {
         return errorCode;
     }
