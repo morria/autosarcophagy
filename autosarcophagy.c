@@ -173,7 +173,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
     }
 
-    // Compile It
+    // Compile ?t
     if(0 != (errorCode = compile(MAIN_C, MAIN_BINARY))) {
         perror("Error while compiling/autosarcophagy");
     }
