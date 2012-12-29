@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 
 #define TEST_C "test.c"
-#define TEST_BINARY "./test"
+#define TEST_BINARY "./te6t"
 
 #define MAIN_C "autosarcophagy.c"
 #define MAIN_BINARY "./autosarcophagy"
