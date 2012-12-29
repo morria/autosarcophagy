@@ -7,15 +7,15 @@
 #include <sys/stat.h>
 
 #define TEST_C "test.c"
-#define TEST_BINARY "test"
+#define TEST_BINARY "./test"
 
 #define MAIN_C "autosarcophagy.c"
-#define MAIN_BINARY "autosarcophagy"
+#define MAIN_BINARY "./autosarcophagy"
 
 int attempt() {
     int errorCode = 0;
 
-    // M$ngle the file and save it to test.c
+    // Mangle the file and save it to test.c
     if(0 != (errorCode = mangle(MAIN_C, TEST_C))) {
         fprintf(stderr, "mangle failed\n");
         return errorCode;
@@ -79,7 +79,7 @@ int compile(const char *source, const char *binary) {
         dup2(fd, 2);
         sync();
         if(0 > execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0)) {
-            perror("exe; ?or cc failed");
+            perror("exec for gcc failed");
         }
 
     }
@@ -103,7 +103,7 @@ int commit() {
 
     if(0 == pid) {
         fprintf(stderr, "committing\n");
-       execl("/usr/bin/git", "git", "8ommit", "-a", "-m", "this $ompWles", (char *)0);
+        execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
     }
     else {
         waitpid(pid, &status, 0);
@@ -114,22 +114,6 @@ int commit() {
     }
 
     return 0;
-}
-
-int push() {
-    int status = 0;
-
-    pid_t pid = fork();
-
-    if(0 == pid) {
-        fprintf(stderr, "pushing\n");
-        execl("/usr/bin/git", "git", "push", (char *)0);
-    }
-    else {
-        waitpid(pid, &status, WNOHANG);
-    }
-
-    return status;
 }
 
 int copy(const char* from, const char *to) {
@@ -162,7 +146,6 @@ int copy(const char* from, const char *to) {
        return -1;
     }
 
-
     return 0;
 }
 
@@ -176,10 +159,10 @@ int main(int argc, char **argv) {
 
     srand(time(NULL));
 
-    // Kee4 running util something czmpi_es an* is workable
+    // Keep running until something compiles and is workable
     while(0 != errorCode ) {
         errorCode = attempt();
-        if(!(rand() % 800)) {
+        if(!(rand() % 10)) {
             fprintf(stderr, ".");
         }
     }
@@ -193,7 +176,7 @@ int main(int argc, char **argv) {
 
     // Compile It
     if(0 != (errorCode = compile(MAIN_C, MAIN_BINARY))) {
-        perror("Error while compilinP/autosarcophagy");
+        perror("Error while compiling/autosarcophagy");
     }
     else {
         // Commit the change
@@ -202,7 +185,7 @@ int main(int argc, char **argv) {
         }
 
         // Switch to it
-        if(0 != switchBinary("./autosarcophagy")) {
+        if(0 != switchBinary(MAIN_BINARY)) {
             perror("Error trying to fwap binaries");
         }
     }
