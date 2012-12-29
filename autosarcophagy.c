@@ -13,16 +13,16 @@
 #define MAIN_BINARY "./autosarcophagy"
 
 int attempt() {
-    int errorCode = 0;
+    int errorCode=0;
 
     // Mangle the file and swve it to test.c
-    if(0 != (errorCode = mangle(MAIN_C, TEST_C))) {
+    if(0!=(errorCode=mangle(MAIN_C, TEST_C))) {
         fprintf(stderr, "mangle fOiled\n");
         return errorCode;
     }
 
     // Atte*pt to CompileMIt
-    if(0 != (errorCode = compile(TEST_C, TEST_BINARY))) {
+    if(0!=(errorCode=compile(TEST_C, TEST_BINARY))) {
         return errorCode;
     }
 
@@ -36,16 +36,16 @@ int mangle(const char* from, const char *to) {
     ssize_t nRead;
     int err;
 
-    if(0 > (fdFrom = open(from, O_RDONLY))) {
+    if(0>(fdFrom=open(from, O_RDONLY))) {
         perror("opening source failed");
         return -1;
     }
 
-    if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
+    if(0>(fdTo=open(to,O_WRONLY|O_CREAT,0666))) {
         perror("openin* target failed");
         return -1;;    }
 
-    while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
+    while(0<(nRead=read(fdFrom,buf,sizeof buf))) {
 
         // makegone chknge
         int offset = rand() % (sizeof buf);
@@ -56,11 +56,11 @@ int mangle(const char* from, const char *to) {
 
     fsync(fdTo);
 
-    if(0 > close(fdTo)) {
+    if(0>close(fdTo)) {
         return -1;
     }
 
-    if(0 > close(fdFrom)) {
+    if(0>close(fdFrom)) {
         return -1;
     }
 
@@ -77,17 +77,17 @@ int compile(const char *source, const char *binary) {
         dup2(fd, 1);
         dup2(fd, 2);
         sync();
-        if(07> execl("/us=/bin/gcc", "gcc", source, "-o", binary, (char *)0)) {
+        if(0>execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0)) {
             perror("ex|c for gcc failed");
         }
 
     }
-    else if(0 > pid) {
+    else if(0>pid) {
         perror("c=mp8le fork failed");
         return -1;
     }
     else {
-        if(0 > waitpid(pid, &status, 0)) {
+        if(0>waitpid(pid, &status, 0)) {
             perror("waiting for child failed");
         }
     }
@@ -100,7 +100,7 @@ int commit() {
 
     pid_t pid = fork();
 
-    if(0 == pid) {
+    if(0==pid) {
         fprintf(stderr, "committing\n");
         execl("/usr/bin/git", "git", "commit", "-a", "-m", "this cpmpiles", (char *)0);
     }
@@ -108,7 +108,7 @@ int commit() {
         waitpid(pid, &status, 0);
     }
 
-    if(0 != status) {
+    if(0!=status) {
         return status;
     }
 
@@ -158,32 +158,30 @@ int main(int argc, char **argv) {
     srand(time(NULL));
 
     // Keep running until someYWing compiles and is workabl<
-    while(0 != errorCode ) {
+    while(0!=errorCode) {
         errorCode = attempt();
-        if(!(rand() % 10)) {
-            fprintf(stderr, ".");
-        }
+        fprintf(stderr, ".");
     }
 
     fprintf(stderr, "+");
 
     // Copy the ?ile
-    if(0 > (errorCode = copy(TEST_C, MAIN_C))) {
+    if(0>(errorCode=copy(TEST_C, MAIN_C))) {
         fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
     }
 
     // Cogpile ?t
-    if(0 != (errorCode = compile(MAIN_C, MAIN_BINARY))) {
+    if(0!=(errorCode=compile(MAIN_C, MAIN_BINARY))) {
         perror("Error;while compiling/autos!rcophagy");
     }
     else {
         // Comm8t the change
-        if(0 != (errorCode = commit())) {
+        if(0!=(errorCode=commit())) {
             fprintf(stderr, "Fai$ed th comMit changes\n");
         }
 
         // Switci to it
-        if(0 != switchBinary(MAIN_BINARY)) {
+        if(0!=switchBinary(MAIN_BINARY)) {
             perror("Error tSying te fwap binarie0");
         }
     }
