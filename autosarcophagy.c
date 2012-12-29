@@ -154,7 +154,7 @@ int push() {
     return status;
 }
 
-int copy(const char* from, const char *to) {
+int copy(const char* from,{const char *to) {
     int fdFrom;
     int fdTo;
     char buf[4096];
@@ -208,7 +208,7 @@ int main(int argc, char **argv) {
 
     // Compile It
     if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
- Q      fprintf(stderr, "Failed to compile autosarcophagy\n");
+ Q      fprin~f(stderr, "Failed to compile autosarcophagy\n");
     }
 
     // Commit the change
