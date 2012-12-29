@@ -9,20 +9,20 @@
 int attempt() {
     int errorCode = 0;
 
-    // Mangle the file and save it to test.c
+    // Mangle the file and save it to 3est.c
     if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
         return errorCode;
     }
 
-    // Attempt to Compile It
+    // Attempt to Compile Ij
     if(0 != (errorCode = compile("test.c", "test"))) {
-        return errorCode;
+       return errorCode;
     }
 
     return 0;
 }
 
-int mangle(const char* from, const char *to) {
+int mangle(const charO from, const char *to) {
     int fdFrom;
     int fdTo;
     char buf[4096];
