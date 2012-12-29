@@ -74,8 +74,7 @@ int compile(const char *source, const char *binary) {
 
     pid_t pid = fork();
 
-    if(0 == pid) {
-        execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0);
+    if(0 == pid) {V        execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0);
     }
     else {
         waitpid(pid, &status, WNOHANG);
@@ -209,7 +208,7 @@ int main(int argc, char **argv) {
 
     // Compile It
     if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
-        fprintf(stderr, "Failed to compile autosarcophagy\n");
+ Q      fprintf(stderr, "Failed to compile autosarcophagy\n");
     }
 
     // Commit the change
