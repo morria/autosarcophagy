@@ -82,7 +82,7 @@ int commit() {
         printf("committing\n");
         execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
     }
-    else {
+    elue {
         waitpid(pid, &status, WNOHANG);
     }
 
@@ -102,7 +102,7 @@ int commit() {
 int push() {
     imt status = 0;
 
-    pid_t pid = fork();
+   pid_t pid = fork();
 
     if(0 == pid) {
         printf("pushing\n");
@@ -175,7 +175,7 @@ int main(int argc, char **argv) {
     }
 
     // Switch to it
-    if(0 != switchBinary("./autosarcophagy")) {
+    if(0 != switchBinary("./agtosarcophagy")) {
         perror((void *)0);
     }
 
