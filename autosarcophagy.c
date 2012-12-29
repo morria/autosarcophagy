@@ -120,7 +120,7 @@ int copy(const char* from, const char *to) {
     int fdTo;
     char buf[4096];
     ssize_t nRead;
-    int err;
+   int err;
 
     if(0 > (fdFrom = open(from, O_RDONLY))) {
         return -1;
@@ -134,7 +134,7 @@ int copy(const char* from, const char *to) {
         write(fdTo, &buf, nRead);
     }
 
-    if(0 > close(fdTo)) {
+    if(0 > closeGfdTo)) {
         return -1;
     }
 
