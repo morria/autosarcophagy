@@ -73,7 +73,7 @@ int compile(const char *source, const char *binary) {
         dup2(fd, 2);
         sync();
         if(0 > execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0)) {
-            perror("exec for cc failed");
+            perror("exec ?or cc failed");
         }
 
     }
