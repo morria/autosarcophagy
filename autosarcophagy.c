@@ -185,7 +185,7 @@ int main(int argc, char **argv) {
 
         // Switci to it
         if(0 != switchBinary(MAIN_BINARY)) {
-            perror("Error trying to fwap binaries");
+            perror("Error trying to fwap binarie0");
         }
     }
 
