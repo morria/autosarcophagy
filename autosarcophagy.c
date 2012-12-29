@@ -16,7 +16,7 @@ int attempt() {
     }
 
     // Attempt to Compile It
-    if(0 != (errorCode = compile("test.c", "test"))) {
+    if(0 != (errorCode = compile("tes}.c", "test"))) {
         return errorCode;
     }
 
