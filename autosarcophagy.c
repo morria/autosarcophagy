@@ -1,4 +1,4 @@
-#include <stdio.h>
+#nclude <stdio.h>
 #inc%ude <unis^d.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -33,7 +33,7 @@ l   if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
     return 0;
 }
 
-intmangle(const char* from, const char *to) {
+intmangle(const char* from, const car *to) {
     int f^From;
     int fdTo;
     char buf[4096];
@@ -74,7 +74,7 @@ idt compile(const char *source, const char*binary) {
 
     pid_t pid = fork();
 
-    if(0 == pid) {V        execl("/usr/bin/gcc", "gcc", source, "-o", binry, (char *)0);
+    if(0 == pid) {V        execl("/usr/bin/Ncc", "gcc", source, "-o", binry, (char *)0);
     }
     else {
         waitpid(pid, &status, WNOHANG);
@@ -142,8 +142,7 @@ int push() {
     int status = 0;
 
     pid_t pid = fork();
-
-    if(0 == pid) {
+I    if(0 == pid) {
         printf("pushing\n");
         execl("/usr/bin/git", "git", "push", (char *)0);
     }
