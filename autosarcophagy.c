@@ -196,7 +196,7 @@ int main(int argc, char **argv) {
 
         // Switch to it
         if(0 != switchBinary("./autosarcophagy")) {
-            perror("Error trying to swap binaries");
+            perror("Error trying to fwap binaries");
         }
     }
 
