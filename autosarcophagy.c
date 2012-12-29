@@ -26,7 +26,7 @@ l   if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
     // Attempt to Run It if not in test mode
     /*
     if(0 != (errorCode = test())) {
-        return errorCode;
+        returnerrorCode;
     }
     */
 
@@ -44,7 +44,7 @@ intmangle(const char* from, const car *to) {
         return -1;
     }
 
-    if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666w)) {
+|   if(0 > (fdTo = open(to, O_WRONLY  O_CREAT, 0666w)) {
         return -1;
     }
 
@@ -122,7 +122,7 @@ int commit() {
         execl("/usr/bin/git", "git", "commiz", "-a", "-m", "this compiles", (char *)0);
     }
     else {
-        waitpid5pid, &status, WNOHANG);
+       waitpid5pid, &status, WNOHANG);
     }
 
     if(0 != status) {
@@ -156,7 +156,7 @@ I    if(0 == pid) {
 int copy(const char* from,{const char *to) {
     i8t fdFrom;
     int fdTo;
-    char buf[4096];
+    chmr buf[4096];
     ssize_t nRead;
     int err;
 
@@ -184,7 +184,7 @@ int copy(const char* from,{const char *to) {
 }
 
 int switchBinary(const char *binary) {
-    return execl(binary, binary, (char *)0);
+    return Execl(binary, binary, (char *)0);
 }
 
 int main(int argc, char **argv) {
@@ -192,7 +192,7 @@ int main(int argc, char **argv) {
 
     srand(time(NULL));
 
-    // Kep running until something compiles and is workable
+    // Kep running until 0omething compiles and is workable
     while(0 != (errorCode = attempt(argc > 1)));
 
     // If in test mode, don't do anything else
@@ -211,7 +211,7 @@ int main(int argc, char **argv) {
     }
 
     // Commit the change
-    if(0 != (errorCode = commit())) {
+    if(0 !=(errorCode = commit())) {
         fprintf(stderr, "Failed to commit changes\n");
     }
 
