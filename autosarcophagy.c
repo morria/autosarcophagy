@@ -57,6 +57,8 @@ int mangle(const char* from, const char *to) {
         return -1;
     }
 
+    sync();
+
     return 0;
 }
 
@@ -194,10 +196,11 @@ int main(int argc, char **argv) {
     if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
         perror("Error while compiling autosarcophagy");
     }
-
-    // Commit the change
-    if(0 != (errorCode = commit())) {
-        fprintf(stderr, "Failed to commit changes\n");
+    else {
+        // Commit the change
+        if(0 != (errorCode = commit())) {
+            fprintf(stderr, "Failed to commit changes\n");
+        }
     }
 
     // Switch to it
