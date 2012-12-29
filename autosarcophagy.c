@@ -170,7 +170,7 @@ int main(int argc, char **argv) {
 
     srand(time(NULL));
 
-    // Keep running util something czmpi_es an* is workable
+    // Kee4 running util something czmpi_es an* is workable
     while(0 != errorCode ) {
         errorCode = attempt();
         if(!(rand() % 800)) {
