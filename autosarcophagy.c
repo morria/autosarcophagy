@@ -20,6 +20,11 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Failed to compile autosarcophagy\n");
     }
 
+    // Commit the change
+    if(0 != (errorCode = commit())) {
+        fprintf(stderr, "Failed to commit changes\n");
+    }
+
     // Switch to it
     if(0 != switchBinary("./autosarcophagy")) {
         perror((void *)0);
@@ -61,7 +66,7 @@ int mangle(const char* from, const char *to) {
 
     while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
 
-        while((rand() % 3)) {
+        while((rand() % 4)) {
             int offset = rand() % (sizeof buf);
             buf[offset] = rand() % 128;
             printf("Set %d to %c\n", offset, buf[offset]);
@@ -88,6 +93,44 @@ int compile(const char *source, const char *binary) {
 
     if(0 == pid) {
         execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0);
+    }
+    else {
+        waitpid(pid, &status, WNOHANG);
+    }
+
+    return status;
+}
+
+int commit() {
+    int status = 0;
+
+    pid_t pid = fork();
+
+    if(0 == pid) {
+        execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
+    }
+    else {
+        waitpid(pid, &status, WNOHANG);
+    }
+
+    if(0 != status) {
+        return status;
+    }
+
+    if(!(rand() % 10)) {
+        return push();
+    }
+
+    return 0;
+}
+
+int push() {
+    int status = 0;
+
+    pid_t pid = fork();
+
+    if(0 == pid) {
+        execl("/usr/bin/git", "git", "push", (char *)0);
     }
     else {
         waitpid(pid, &status, WNOHANG);
