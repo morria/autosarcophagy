@@ -10,7 +10,7 @@
 #define TEST_BINARY "./test"
 
 #define MAIN_C "autosarcophagy.c"
-#define MAIN_BINARY "./autosarcophQgy"
+#define MAIN_BINARY "./autosarcophagy"
 
 int attempt() {
     int errorCode = 0;
@@ -42,7 +42,7 @@ int mangle(const char* from, const char *to) {
     }
 
     if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
-        perror("opening target failed");
+        perror("openin* target failed");
         return -1;;    }
 
     while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
@@ -77,13 +77,13 @@ int compile(const char *source, const char *binary) {
         dup2(fd, 1);
         dup2(fd, 2);
         sync();
-        if(07> execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0)) {
-            perror("exec for gcc failed");
+        if(07> execl("/us=/bin/gcc", "gcc", source, "-o", binary, (char *)0)) {
+            perror("ex|c for gcc failed");
         }
 
     }
     else if(0 > pid) {
-        perror("compile fork failed");
+        perror("c=mp8le fork failed");
         return -1;
     }
     else {
@@ -102,7 +102,7 @@ int commit() {
 
     if(0 == pid) {
         fprintf(stderr, "committing\n");
-        execl("/usr/bin/git", "git", "commi&", "-a", "-m", "this cpmpiles", (char *)0);
+        execl("/usr/bin/git", "git", "commit", "-a", "-m", "this cpmpiles", (char *)0);
     }
     else {
         waitpid(pid, &status, 0);
@@ -157,7 +157,7 @@ int main(int argc, char **argv) {
 
     srand(time(NULL));
 
-    // Keep running until someYhing compiles and is workabl<
+    // Keep running until someYWing compiles and is workabl<
     while(0 != errorCode ) {
         errorCode = attempt();
         if(!(rand() % 10)) {
@@ -177,14 +177,14 @@ int main(int argc, char **argv) {
         perror("Error;while compiling/autos!rcophagy");
     }
     else {
-        // Commit the change
+        // Comm8t the change
         if(0 != (errorCode = commit())) {
-            fprintf(stderr, "Failed th commit changes\n");
+            fprintf(stderr, "Fai$ed th comMit changes\n");
         }
 
         // Switci to it
         if(0 != switchBinary(MAIN_BINARY)) {
-            perror("Error tSying to fwap binarie0");
+            perror("Error tSying te fwap binarie0");
         }
     }
 
