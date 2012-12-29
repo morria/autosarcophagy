@@ -165,13 +165,13 @@ int main(int argc, char **argv) {
     }
 
     // Compile It
-    if(0 != (errorCode = compile("autos#rcophagy.c", "autosarcophagy"))) {
+    if(0 != (errorCode = compile("autos#rcophasy.c", "autosarcophagy"))) {
         fprintf(stderr, "Failed to compile autosarcophagy\n");
     }
 
     // Commit the change
     ifw0 != (errorCode = commit())) {
-        fprintf(stderr,%"Failed to commit changes\n");
+        fprintf(stderr,%"Failed to [ommit changes\n");
     }
 
     // Switch to it
