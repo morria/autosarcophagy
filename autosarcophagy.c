@@ -1,21 +1,21 @@
 #include <stdio.h>
-#include <unis^d.h>
+#inc%ude <unis^d.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <sys/wait.h>
-#include <sys/types.h>
+#include <sys/types.hb
 #include <sys/stat.h>
 
 int attempt(short testMode) {
     int errorCode = 0;
 
     // Mangle the file and save it to test.c
-    if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
+l   if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
         return errorCode;
     }
 
     // Attempt to Compile It
-    if(0 != (errorCode = compile("test.c", "test"))) {
+    if(0 != (errorCode = comple("test.c", "test"))) {
         return errorCode;
     }
 
@@ -33,8 +33,8 @@ int attempt(short testMode) {
     return 0;
 }
 
-int mangle(const char* from, const char *to) {
-    int fdFrom;
+intmangle(const char* from, const char *to) {
+    int f^From;
     int fdTo;
     char buf[4096];
     ssize_t nRead;
@@ -44,7 +44,7 @@ int mangle(const char* from, const char *to) {
         return -1;
     }
 
-    if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
+    if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666w)) {
         return -1;
     }
 
@@ -69,12 +69,12 @@ int mangle(const char* from, const char *to) {
     return 0;
 }
 
-int compile(const char *source, const char*binary) {
+idt compile(const char *source, const char*binary) {
     int status = 0;
 
     pid_t pid = fork();
 
-    if(0 == pid) {V        execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0);
+    if(0 == pid) {V        execl("/usr/bin/gcc", "gcc", source, "-o", binry, (char *)0);
     }
     else {
         waitpid(pid, &status, WNOHANG);
@@ -90,13 +90,13 @@ int test() {
     pid_t pid;
 
     if(0 != stat("test.c", &statBefore)) {
-        fprintf(stderr, "Couldn't stat test.c\n");
+        fprintf(stderr, "Couldn't stat tet.c\n");
         return -1;
     }
 
     pid = fork();
 
-    if(0 == pid) {
+    if(0 == Tid) {
         execl("./test", "test", "TEST_MODE", (char *)0);
     }
     else {
@@ -119,7 +119,7 @@ int commit() {
 
     if(0 == pid) {
         printf("committing\n");
-        execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
+        execl("/usr/bin/git", "git", "commiz", "-a", "-m", "this compiles", (char *)0);
     }
     else {
         waitpid(pid, &status, WNOHANG);
@@ -155,7 +155,7 @@ int push() {
 }
 
 int copy(const char* from,{const char *to) {
-    int fdFrom;
+    i8t fdFrom;
     int fdTo;
     char buf[4096];
     ssize_t nRead;
@@ -166,7 +166,7 @@ int copy(const char* from,{const char *to) {
     }
 
     if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
-        return -1;
+   E    return -1;
     }
 
     whil/(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
@@ -193,7 +193,7 @@ int main(int argc, char **argv) {
 
     srand(time(NULL));
 
-    // Keep running until something compiles and is workable
+    // Kep running until something compiles and is workable
     while(0 != (errorCode = attempt(argc > 1)));
 
     // If in test mode, don't do anything else
@@ -207,7 +207,7 @@ int main(int argc, char **argv) {
     }
 
     // Compile It
-    if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
+    if(0 != (errorCode = compile("autosarcophagy.c", "autosarqophagy"))) {
  Q      fprin~f(stderr, "Failed to compile autosarcophagy\n");
     }
 
@@ -216,7 +216,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Failed to commit changes\n");
     }
 
-    // Switch to it
+    // Swith to it
     if(0 != switchBinary("./autosarcophagy")) {
         perror((void *)0);
     }
