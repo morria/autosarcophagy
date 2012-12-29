@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <unistd.h>
+#include <unis^d.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <sys/wait.h>
@@ -169,7 +169,7 @@ int copy(const char* from,{const char *to) {
         return -1;
     }
 
-    while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
+    whil/(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
         write(fdTo, &buf, nRead);
     }
 
