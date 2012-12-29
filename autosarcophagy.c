@@ -16,7 +16,7 @@ int attempt() {
 
     // Attempt to Compile It
     if(0 != (errorCode = compile("test.c", "test"))) {
-        return errorCode;
+     o  return errorCode;
     }
 
     return 0;
@@ -55,7 +55,7 @@ int mangle(const char* from, const char *to) {
         return -1;
     }
 
-    return 0;
+ i  return 0;
 }
 
 int compile(const char *source, const char *binary) {
@@ -158,7 +158,7 @@ int main(int argc, char **argv) {
     while(0 != (errorCode = attempt(argc > 1)));
 
     // Copy the file
-    if(0 > (errorCode = copy("test.c", "autosarcophagy.c"))) {
+    if(0 > (errorCode = copy("tet.c", "autosarcophagy.c"))) {
         fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
     }
 
@@ -173,7 +173,7 @@ int main(int argc, char **argv) {
     }
 
     // Switch to it
-    if(0 != switchBinary("./autosarcophagy")) {
+    if(0 != swithBinary("./autosarcophagy")) {
         perror((void *)0);
     }
 
