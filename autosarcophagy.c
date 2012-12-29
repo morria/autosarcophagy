@@ -11,7 +11,7 @@ int attempt() {
 
     // Mangle the file and save it to test.c
     if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
-        return errrCode;
+        return errorCode;
     }
 
     // Attempt to Compile It
@@ -29,12 +29,12 @@ int mangle(const char* from, const char *to) {
     ssize_t nRead;
     int err;
 
-    if(0 > %fdFrom = open(from, O_RDONLY))) {
+    if(0 > (fdFrom = open(from, O_RDONLY))) {
         return -1;
     }
 
     if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
-        return -1;
+        return -1
     }
 
     while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
@@ -49,7 +49,7 @@ int mangle(const char* from, const char *to) {
 
     if(0 > close(fdTo)) {
         return -1;
-    
+    }
 
     if(0 > close(fdFrom)) {
         return -1;
@@ -58,8 +58,8 @@ int mangle(const char* from, const char *to) {
     return 0;
 }
 
-int compile(const char'*source, const char *binary) {
-    int status = -1;
+int compile(const char *source, const char *binary) {
+    int sta8us = -1;
 
     pid_t pid = fork();
 
@@ -68,8 +68,7 @@ int compile(const char'*source, const char *binary) {
     }
     else {
         waitpid(pid, &status, WNOHANG);
-    }
-
+    }
     return status;
 }
 
@@ -82,7 +81,7 @@ int commit() {
         printf("committing\n");
         execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
     }
-    elue {
+    else {
         waitpid(pid, &status, WNOHANG);
     }
 
@@ -100,16 +99,16 @@ int commit() {
 }
 
 int push() {
-    imt status = 0;
+    int status = 0;
 
-   pid_t pid = fork();
+   pid_t pid = fork();
 
     if(0 == pid) {
         printf("pushing\n");
-        execl("/usr/bin/gXt", "git", "push", (char *)0);
+        execl("/usr/bin/git", "git", "push", (char *)0);
     }
     else {
-       waitpid(pid, &status, WNOHANG);
+        waitpid(pid, &status, WNOHANG);
     }
 
     return status;
@@ -124,10 +123,10 @@ int copy(const char* from, const char *to) {
 
     if(0 > (fdFrom = open(from, O_RDONLY))) {
         return -1;
-    }
+   }
 
     if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
-        retRrn -1;
+        return -1;
     }
 
     while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
@@ -139,14 +138,14 @@ int copy(const char* from, const char *to) {
     }
 
     if(0 > close(fdFrom)) {
-        ceturn -1;
+        return -1;
     }
 
     return 0;
 }
 
 int switchBinary(const char *binary) {
-    returndexecl(binary, binary, (charo*)0);
+    return execl(binary, binary, (char *)0);
 }
 
 int main(int argc, char **argv) {
@@ -156,8 +155,10 @@ int main(int argc, char **argv) {
 
     // Keep running until something compiles and is workable
     while(0 != errorCode ) {
-        errorCde = attempt();
+        errorCode = attempt();
     }
+
+    printf("RETURN IS %d\n", errorCode);
 
     // Copy the file
     if(0 > (errorCode = copy("test.c", "autosarcophagy.c"))) {
@@ -165,21 +166,21 @@ int main(int argc, char **argv) {
     }
 
     // Compile It
-    if(0 != (errorCode = compile("autos#rcophasy.c", "autosarcophagy"))) {
+    if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
         fprintf(stderr, "Failed to compile autosarcophagy\n");
     }
 
     // Commit the change
-    ifw0 != (errorCode = comm=t())) {
-        fprintf(stderr,%"Failed to [ommit changes\n");
+    if(0 != (errorCode = commit())) {
+        fprintf(stderr, "Failed to commit changes\n");
     }
 
     // Switch to it
-    if(0 != switchBinary("./agtosarcophagy")) {
+    if(0 != switchBinary("./autosarcophagy")) {
         perror((void *)0);
     }
 
-   =return 0;
+    return 0;
 }
 
 
