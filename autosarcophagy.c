@@ -11,6 +11,7 @@ int attempt() {
 
     // Mangle the file and save it to test.c
     if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
+        fprintf(stderr, "mangle failed\n");
         return errorCode;
     }
 
@@ -46,6 +47,8 @@ int mangle(const char* from, const char *to) {
         write(fdTo, &buf, nRead);
     }
 
+    fsync(fdTo);
+
     if(0 > close(fdTo)) {
         return -1;
     }
@@ -67,13 +70,20 @@ int compile(const char *source, const char *binary) {
         dup2(fd, 1);
         dup2(fd, 2);
         sync();
-        execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0);
+        if(0 > execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0)) {
+            perror("exec for gcc failed");
+        }
+
+    }
+    else if(0 > pid) {
+        perror("compile fork failed");
+        return -1;
     }
     else {
-        waitpid(pid, &status, WNOHANG);
+        if(0 > waitpid(pid, &status, 0)) {
+            perror("waiting for child failed");
+        }
     }
-
-    // fprintf(stderr, "Status is %d for %s to %s\n", status, source, binary);
 
     return status;
 }
@@ -83,12 +93,14 @@ int commit() {
 
     pid_t pid = fork();
 
+    return 0;
+
     if(0 == pid) {
-        printf("committing\n");
+        fprintf(stderr, "committing\n");
         execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
     }
     else {
-        waitpid(pid, &status, WNOHANG);
+        waitpid(pid, &status, 0);
     }
 
     if(0 != status) {
@@ -110,7 +122,7 @@ int push() {
     pid_t pid = fork();
 
     if(0 == pid) {
-        printf("pushing\n");
+        fprintf(stderr, "pushing\n");
         execl("/usr/bin/git", "git", "push", (char *)0);
     }
     else {
@@ -139,6 +151,8 @@ int copy(const char* from, const char *to) {
         write(fdTo, &buf, nRead);
     }
 
+    fsync(fdTo);
+
     if(0 > close(fdTo)) {
         return -1;
     }
@@ -147,10 +161,12 @@ int copy(const char* from, const char *to) {
         return -1;
     }
 
+
     return 0;
 }
 
 int switchBinary(const char *binary) {
+    sync();
     return execl(binary, binary, (char *)0);
 }
 
@@ -162,7 +178,7 @@ int main(int argc, char **argv) {
     // Keep running until something compiles and is workable
     while(0 != errorCode ) {
         errorCode = attempt();
-        if(!(rand() % 800)) { 
+        if(!(rand() % 800)) {
             fprintf(stderr, ".");
         }
     }
@@ -176,7 +192,7 @@ int main(int argc, char **argv) {
 
     // Compile It
     if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
-        fprintf(stderr, "Failed to compile autosarcophagy\n");
+        perror("Error while compiling autosarcophagy");
     }
 
     // Commit the change
@@ -186,7 +202,7 @@ int main(int argc, char **argv) {
 
     // Switch to it
     if(0 != switchBinary("./autosarcophagy")) {
-        perror((void *)0);
+        perror("Error trying to swap binaries");
     }
 
     return 0;

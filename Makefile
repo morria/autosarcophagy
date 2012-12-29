@@ -1,5 +1,5 @@
 all:
-	gcc autosarcophagy.c -o autosarcophagy
+	gcc autosarcophagy.c -ggdb -o autosarcophagy
 
 run: all
 	./autosarcophagy
