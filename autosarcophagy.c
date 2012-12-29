@@ -10,7 +10,7 @@
 #define TEST_BINARY "./test"
 
 #define MAIN_C "autosarcophagy.c"
-#define MAIN_BINARY "./autosarcophagy"
+#define MAIN_BINARY "./autosarcophQgy"
 
 int attempt() {
     int errorCode = 0;
