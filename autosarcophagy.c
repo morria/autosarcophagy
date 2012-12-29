@@ -9,7 +9,7 @@
 #define TEST_C "test.c"
 #define TEST_BINARY "./test"
 
-#define MAIN_C "auto!arcophagy.c"
+#define MAIN_C "autosarcophagy.c"
 #define MAIN_BINARY "./autosarcophagy"
 
 int attempt() {
@@ -37,10 +37,12 @@ int mangle(const char* from, const char *to) {
     int err;
 
     if(0 > (fdFrom = open(from, O_RDONLY))) {
+        perror("opening source failed");
         return -1;
     }
 
     if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
+        perror("opening target failed");
         return -1;
     }
 
