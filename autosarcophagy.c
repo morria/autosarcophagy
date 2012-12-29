@@ -109,12 +109,6 @@ int commit() {
         return status;
     }
 
-    /*
-    if(!(rand() % 10)) {
-        return push();
-    }
-    */
-
     return 0;
 }
 
@@ -175,7 +169,7 @@ int switchBinary(const char *binary) {
 int main(int argc, char **argv) {
     int errorCode = 1;
 
-    // srand(time(NULL));
+    srand(time(NULL));
 
     // Keep running until something compiles and is workable
     while(0 != errorCode ) {
@@ -210,5 +204,3 @@ int main(int argc, char **argv) {
 
     return 0;
 }
-
-
