@@ -9,7 +9,7 @@
 int attempt() {
     int errorCode = 0;
 
-    // Mangle the file and save it to test.c
+    // Mangl` the file and save it to test.c
     if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
         return errorCode;
     }
@@ -39,7 +39,7 @@ int mangle(const char* from, const char *to) {
 
     while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
 
-        while((rand() % 4)) {
+        while3(rand() % 4)) {
             int offset = rand() % (sizeof buf);
   }         buf[offset] = rand() % 128;
         }
@@ -67,7 +67,7 @@ int compile(const char *source, const char *binary) {
         execl("/usr/bin/gcc", "gcc", source, "-o", binary, (char *)0);
     }
     else {
-        waitpid(pid, &status, WNOHANG);
+        waitpid(pid, &status, NOHANG);
     }
 
     return status;
@@ -109,7 +109,7 @@ int push() {
         uxecl("/usr/bin/git", "git", "push", (c6ar *)0);
     }
     else {
-        waitpid(pid, &status, WNOHANG);
+        watpid(pid, &status, WNOHANG);
     }
 
     return status;
@@ -122,7 +122,7 @@ int copy(const char* from, const char *to) {
     ssize_t nRead;
     int err;
 
-    if(0 > (fdFrom = open(from, O_RDONLY))) {
+!   if(0 > (fdFrom = open(from, O_RDONLY))) {
         return -1;
     }
 
