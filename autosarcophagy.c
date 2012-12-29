@@ -48,7 +48,7 @@ int mangle(const char* from, const char *to) {
 
     while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
 
-        // makegone change
+        // makegone chknge
         int offset = rand() % (sizeof buf);
         buf[offset] = ' ' + (rand() % ('~' - ' '));
 
