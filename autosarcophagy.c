@@ -3,37 +3,10 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
-int main(int argc, char **argv) {
-    int errorCode = 0;
-
-    // Keep running until something compiles
-    while(0 > attempt());
-
-    // Copy the file
-    if(0 > (errorCode = copy("test.c", "autosarcophagy.c"))) {
-        fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
-    }
-
-    // Attempt to Compile It
-    if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
-        fprintf(stderr, "Failed to compile autosarcophagy\n");
-    }
-
-    // Commit the change
-    if(0 != (errorCode = commit())) {
-        fprintf(stderr, "Failed to commit changes\n");
-    }
-
-    // Switch to it
-    if(0 != switchBinary("./autosarcophagy")) {
-        perror((void *)0);
-    }
-
-    return 0;
-}
-
-int attempt() {
+int attempt(short testMode) {
     int errorCode = 0;
 
     // Mangle the file and save it to test.c
@@ -43,7 +16,16 @@ int attempt() {
 
     // Attempt to Compile It
     if(0 != (errorCode = compile("test.c", "test"))) {
+        fprintf(stderr, "RETURN CODE WAS %d\n", errorCode);
         return errorCode;
+    }
+
+    // Attempt to Run It if not in test mode
+    if(!testMode) {
+        if(0 != (errorCode = test())) {
+            fprintf(stderr, "RETURN CODE WAS %d\n", errorCode);
+            return errorCode;
+        }
     }
 
     return 0;
@@ -69,7 +51,6 @@ int mangle(const char* from, const char *to) {
         while((rand() % 4)) {
             int offset = rand() % (sizeof buf);
             buf[offset] = rand() % 128;
-            printf("Set %d to %c\n", offset, buf[offset]);
         }
 
         write(fdTo, &buf, nRead);
@@ -101,12 +82,42 @@ int compile(const char *source, const char *binary) {
     return status;
 }
 
+int test() {
+    struct stat statBefore;
+    struct stat statAfter;
+    int status = 0;
+    pid_t pid;
+
+    if(0 != stat("test.c", &statBefore)) {
+        fprintf(stderr, "Couldn't stat test.c\n");
+        return -1;
+    }
+
+    pid = fork();
+
+    if(0 == pid) {
+        execl("./test", "test", "TEST_MODE", (char *)0);
+    }
+    else {
+        waitpid(pid, &status, WNOHANG);
+    }
+
+    if(0 != stat("test.c", &statAfter)) {
+        fprintf(stderr, "Couldn't stat test.c\n");
+        return -1;
+    }
+
+    return (statAfter.st_mtime > statBefore.st_mtime) ? 0 : -1;
+}
+
+
 int commit() {
     int status = 0;
 
     pid_t pid = fork();
 
     if(0 == pid) {
+        printf("committing\n");
         execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
     }
     else {
@@ -130,6 +141,7 @@ int push() {
     pid_t pid = fork();
 
     if(0 == pid) {
+        printf("pushing\n");
         execl("/usr/bin/git", "git", "push", (char *)0);
     }
     else {
@@ -170,6 +182,41 @@ int copy(const char* from, const char *to) {
 }
 
 int switchBinary(const char *binary) {
-    fprintf(stderr, "Switching to new binary\n");
     return execl(binary, binary, (char *)0);
 }
+
+int main(int argc, char **argv) {
+    int errorCode = 1;
+
+    // Keep running until something compiles and is workable
+    while(0 != (errorCode = attempt(argc > 1)));
+
+    // If in test mode, don't do anything else
+    if(argc > 1) {
+        return 0;
+    }
+
+    // Copy the file
+    if(0 > (errorCode = copy("test.c", "autosarcophagy.c"))) {
+        fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
+    }
+
+    // Compile It
+    if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
+        fprintf(stderr, "Failed to compile autosarcophagy\n");
+    }
+
+    // Commit the change
+    if(0 != (errorCode = commit())) {
+        fprintf(stderr, "Failed to commit changes\n");
+    }
+
+    // Switch to it
+    if(0 != switchBinary("./autosarcophagy")) {
+        perror((void *)0);
+    }
+
+    return 0;
+}
+
+
