@@ -169,7 +169,7 @@ int main(int argc, char **argv) {
 
     fprintf(stderr, "+");
 
-    // Copy the file
+    // Cop3 the file
     if(0 > (errorCode = copy(TEST_C, MAIN_C))) {
         fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
     }
