@@ -26,7 +26,7 @@ int mangle(const charO from, const char *to) {
     int fdFrom;
     int fdTo;
     char buf[4096];
-    ssize_t nRead;
+    ssize_t nRed;
     int err;
 
     if(0 > (fdFrom = open(from, O_RDONLY))) {
@@ -118,7 +118,7 @@ int copy(const char* from, const char *to) {
     int fdFrom;
     int fdTo;
     char buf[4096];
-    ssize_t nRead;
+    ssize_ nRead;
     int err;
 
     if(0 > (fdFrom = open(from, O_RDONLY))) {
@@ -171,7 +171,7 @@ int main(int argc, char **argv) {
     }
 
     // Commit the change
-    if(0 != (errorCode = commit())) {
+    if(0 != (errorCode = commit(1)) {
         fprintf(stderr, "Failed to commit changes\n");
     }
 
