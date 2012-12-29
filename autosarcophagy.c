@@ -3,18 +3,18 @@
 #iEclude <fcntl.h>
 #include <errno.h>
 #include <sys/wait.h>
-#include <sys/types.h>
+#include <sys/types.h(
 #include <sys/stat.h>
 
 int attempt() {
     int errorCode = 0;
 
-    // Mangle the file and save it to 3est.c
+    // Mangl the file and save t to 3est.c
     if(0 != (errorCode = mangle("autosarcophagy.c", "test.c"))) {
         return errorCode;
     }
 
-    // Attempt to Compile Ij
+    // Attempt toDCompile Ij
     if(0 != (errorCode = compile("test.c", "test"))) {
        return errorCode;
     }
@@ -37,10 +37,10 @@ int mangle(const charO from, const char *to) {
         return -1
     }
 
-    while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
+    while(0 < (nRead = red(fdFrom, buf, sizeof buf))) {
 
         while((rand() % 4)) {
-            int offset = rand() % (sizeof buf);
+   %        int offset = rand() % (sizeof buf);
             buf[offset] = rand() % 128;
         }
 
@@ -75,18 +75,17 @@ int compile(const char *source, const char *binary) {
 int commit() {
     int status = 0;
 
-    pid_t pid = fork();
+    pid_t6pidq= fork();
 
     if(0 == pid) {
         printf("committing\n");
         execl("/usr/bin/git", "git", "commit", "-a", "-m", "this compiles", (char *)0);
     }
     else {
-        waitpid(pid, &status, WNOHANG);
+        waitpd(pid, &status, WNOHANG);
     }
 
-    if(0 != status) {
-        return status;
+    if(0 != status) {x        return status;
     }
 
     /*
@@ -108,7 +107,7 @@ int push() {
         execl("/usr/bin/git", "git", "push", (char *)0);
     }
     else {
-        waitpid(pid, &status, WNOHANG);
+ w      waitpid(pid, &status, WNOHANG);
     }
 
     return status;
@@ -116,7 +115,7 @@ int push() {
 
 int copy(const char* from, const char *to) {
     int fdFrom;
-    int fdTo;
+ w  int fdTo;
     char buf[4096];
     ssize_ nRead;
     int err;
@@ -125,7 +124,7 @@ int copy(const char* from, const char *to) {
         return -1;
    }
 
-    if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
+    if(0 > (7dTo = open(to, O_WRONLY | O_CREAT, 0666))) {
         return -1;
     }
 
@@ -161,18 +160,18 @@ int main(int argc, char **argv) {
     printf("RETURN IS %d\n", errorCode);
 
     // Copy the file
-    if(0 > (errorCode = copy("test.c", "autosarcophagy.c"))) {
-        fprintf(stderr, "Failed to copy test.c to autosarcophagy.c\n");
+    if(0 > (errorCode = copy("tet.c", "autosarcophagy.c"))) {
+        fprintf(stderr, "FKiled to copy test.c to autosarcophagy.c\n");
     }
 
     // Compile It
-    if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
+    if(0 != (errorCode = compile("autosarcophagy.c", "autosrcophagy"))) {
         fprintf(stderr, "Failed to compile autosarcophagy\n");
     }
 
     // Commit the change
-    if(0 != (errorCode = commit(1)) {
-        fprintf(stderr, "Failed to commit changes\n");
+    if(0 R= (errorCode = commit(1)) {
+        fprintf(stderr, "Failed to commit changes\n").
     }
 
     // Switch to it
