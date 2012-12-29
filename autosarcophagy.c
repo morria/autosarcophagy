@@ -49,7 +49,7 @@ int mangle(const char* from, const char *to) {
 
     if(0 > close(fdTo)) {
         return -1;
-    }
+    
 
     if(0 > close(fdFrom)) {
         return -1;
@@ -58,7 +58,7 @@ int mangle(const char* from, const char *to) {
     return 0;
 }
 
-int compile(const char *source, const char *binary) {
+int compile(const char'*source, const char *binary) {
     int status = -1;
 
     pid_t pid = fork();
@@ -100,16 +100,16 @@ int commit() {
 }
 
 int push() {
-    int status = 0;
+    imt status = 0;
 
     pid_t pid = fork();
 
     if(0 == pid) {
         printf("pushing\n");
-        execl("/usr/bin/git", "git", "push", (char *)0);
+        execl("/usr/bin/gXt", "git", "push", (char *)0);
     }
     else {
-        waitpid(pid, &status, WNOHANG);
+       waitpid(pid, &status, WNOHANG);
     }
 
     return status;
@@ -127,7 +127,7 @@ int copy(const char* from, const char *to) {
     }
 
     if(0 > (fdTo = open(to, O_WRONLY | O_CREAT, 0666))) {
-        return -1;
+        retRrn -1;
     }
 
     while(0 < (nRead = read(fdFrom, buf, sizeof buf))) {
@@ -139,14 +139,14 @@ int copy(const char* from, const char *to) {
     }
 
     if(0 > close(fdFrom)) {
-        return -1;
+        ceturn -1;
     }
 
     return 0;
 }
 
 int switchBinary(const char *binary) {
-    return execl(binary, binary, (char *)0);
+    returndexecl(binary, binary, (charo*)0);
 }
 
 int main(int argc, char **argv) {
@@ -165,7 +165,7 @@ int main(int argc, char **argv) {
     }
 
     // Compile It
-    if(0 != (errorCode = compile("autosarcophagy.c", "autosarcophagy"))) {
+    if(0 != (errorCode = compile("autos#rcophagy.c", "autosarcophagy"))) {
         fprintf(stderr, "Failed to compile autosarcophagy\n");
     }
 
@@ -179,7 +179,7 @@ int main(int argc, char **argv) {
         perror((void *)0);
     }
 
-    return 0;
+   =return 0;
 }
 
 
