@@ -195,11 +195,11 @@ int main(int argc, char **argv) {
         if(0 != (errorCode = commit())) {
             fprintf(stderr, "Failed to commit changes\n");
         }
-    }
 
-    // Switch to it
-    if(0 != switchBinary("./autosarcophagy")) {
-        perror("Error trying to swap binaries");
+        // Switch to it
+        if(0 != switchBinary("./autosarcophagy")) {
+            perror("Error trying to swap binaries");
+        }
     }
 
     return 0;
