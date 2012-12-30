@@ -51,6 +51,10 @@ int mangle(const char* from, const char *to) {
         int offset = rand() % (sizeof buf);
         buf[offset] = ' ' + (rand() % ('~' - ' '));
 
+        offset = rand() % (sizeof buf);
+        buf[offset] = ' ' + (rand() % ('~' - ' '));
+
+
         write(fdTo, &buf, nRead);
     }
 
