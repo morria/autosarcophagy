@@ -15,7 +15,7 @@
 int attempt() {
     int errorCode=0;
 
-    // Mangle the file and swve it to test.c
+    // Mangle the file and save it to test.c
     if(0!=(errorCode=mangle(MAIN_C, TEST_C))) {
         fprintf(stderr, "mangle fOiled\n");
         return errorCode;
